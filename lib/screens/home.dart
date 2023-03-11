@@ -42,8 +42,8 @@ class _HomeState extends State<Home> {
         children: [
           Container(
             color: (this.isDark)
-                ? Color.fromRGBO(28, 35, 49, 1)
-                : Color.fromRGBO(236, 239, 244, 1),
+                ? const Color.fromRGBO(28, 35, 49, 1)
+                : const Color.fromRGBO(236, 239, 244, 1),
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
             child: Column(
               children: [
@@ -66,7 +66,7 @@ class _HomeState extends State<Home> {
                           size: 40.0,
                           color: (this.isDark)
                               ? Colors.white
-                              : Color.fromRGBO(28, 35, 49, 1),
+                              : const Color.fromRGBO(28, 35, 49, 1),
                         )))
                     : Expanded(
                         child: ListView(
@@ -76,6 +76,7 @@ class _HomeState extends State<Home> {
                             ),
                             for (ToDo todoitem in todosList)
                               TodoItem(
+                                isDark: this.isDark,
                                 todo: todoitem,
                                 onTodoChanged: _handleTodoChange,
                                 onDeleteItem: _handleTodoDelete,
@@ -114,7 +115,7 @@ class _HomeState extends State<Home> {
                     ),
                     child: TextField(
                       controller: _todoController,
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                       decoration: const InputDecoration(
                         hintText: "Add a new task",
                         hintStyle: TextStyle(color: Colors.black), // theme add
@@ -195,8 +196,9 @@ class _HomeState extends State<Home> {
 
   AppBar _buildAppbar() {
     return AppBar(
-      backgroundColor:
-          (this.isDark) ? Color.fromRGBO(23, 31, 46, 1) : Colors.grey.shade200,
+      backgroundColor: (this.isDark)
+          ? const Color.fromRGBO(23, 31, 46, 1)
+          : Colors.grey.shade200,
       elevation: 0,
       title: Text(
         "Flutter Todo App",

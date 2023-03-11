@@ -2,6 +2,14 @@
 
 A new Flutter project.
 
+## To build for Linux
+
+    flutter build linux
+
+## To build for Android
+
+    flutter build apk
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
