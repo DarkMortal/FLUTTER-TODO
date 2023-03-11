@@ -1,7 +1,5 @@
-import 'dart:math';
-import '../models/todo.dart';
-
 import 'package:flutter/material.dart';
+import 'package:todolistapp/models/todo.dart';
 
 class TodoItem extends StatelessWidget {
   // const TodoItem({super.key});
@@ -50,7 +48,7 @@ class TodoItem extends StatelessWidget {
               color: Colors.red.shade400,
               borderRadius: BorderRadius.circular(5)),
           child: IconButton(
-            icon: Icon(Icons.delete),
+            icon: const Icon(Icons.delete),
             iconSize: 18,
             color: Colors.white,
             onPressed: () {
