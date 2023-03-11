@@ -24,6 +24,6 @@ ToDo deSerialize(String s) {
   List<String> str = s.split(' ');
   String id = str[0];
   String bool = str[str.length - 1];
-  String text = s.substring(id.length + 1, s.length - bool.length);
+  String text = s.substring(id.length + 1, s.length - bool.length - 1);
   return ToDo(id: id, todoText: text, isDone: bool.toLowerCase() == 'true');
 }

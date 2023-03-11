@@ -7,9 +7,11 @@ class TodoItem extends StatelessWidget {
   final ToDo todo;
   final onTodoChanged;
   final onDeleteItem;
+  final bool isDark;
 
   const TodoItem({
     Key? key,
+    required this.isDark,
     required this.todo,
     required this.onTodoChanged,
     required this.onDeleteItem,
@@ -20,7 +22,7 @@ class TodoItem extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: (isDark) ? const Color.fromRGBO(23, 31, 46, 1) : Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
       child: ListTile(
@@ -35,10 +37,10 @@ class TodoItem extends StatelessWidget {
             todo.isDone ? Icons.check_box : Icons.check_box_outline_blank,
             color: Colors.blue.shade800),
         title: Text(
-          todo.todoText.toString(),
+          todo.todoText!,
           style: TextStyle(
               fontSize: 16,
-              color: Colors.black87,
+              color: (isDark) ? Colors.white : Colors.black87,
               decoration: todo.isDone ? TextDecoration.lineThrough : null),
         ),
         trailing: Container(
