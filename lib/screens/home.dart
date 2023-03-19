@@ -147,7 +147,8 @@ class _HomeState extends State<Home> {
   }
 
   void _addTodoItem(String todo, BuildContext context) {
-    if (todo == "") {
+    String str = todo.trim();
+    if (str == "") {
       showDialog(
           context: context,
           builder: (context) => Container(
@@ -172,7 +173,7 @@ class _HomeState extends State<Home> {
       setState(() {
         todosList.add(ToDo(
           id: DateTime.now().millisecondsSinceEpoch.toString(),
-          todoText: todo,
+          todoText: str,
         ));
       });
       SharedPreferencesHelper.saveTasks(todosList);
