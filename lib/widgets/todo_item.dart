@@ -46,7 +46,7 @@ class TodoItem extends StatelessWidget {
               decoration: todo.isDone ? TextDecoration.lineThrough : null),
         ),
         trailing: Wrap(
-            spacing: 12, // space between two icons
+            spacing: 10, // space between two icons
             children: [
               Container(
                   decoration: BoxDecoration(

@@ -160,14 +160,15 @@ class _HomeState extends State<Home> {
       }
       if (isPresent)
         showMessage(context, "Task already present", this.isDark);
-      else
+      else {
         setState(() {
           todosList.add(ToDo(
             id: DateTime.now().millisecondsSinceEpoch.toString(),
             todoText: str,
           ));
         });
-      SharedPreferencesHelper.saveTasks(todosList);
+        SharedPreferencesHelper.saveTasks(todosList);
+      }
       _todoController.clear();
     }
   }
@@ -190,9 +191,9 @@ class _HomeState extends State<Home> {
           todosList[todosList.indexWhere((element) => element.id == id)]
               .todoText = value;
         });
+        SharedPreferencesHelper.saveTasks(todosList);
       }
     });
-    SharedPreferencesHelper.saveTasks(todosList);
   }
 
   void _handleTodoDelete(String id) {
