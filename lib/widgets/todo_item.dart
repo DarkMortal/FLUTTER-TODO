@@ -7,6 +7,7 @@ class TodoItem extends StatelessWidget {
   final ToDo todo;
   final onTodoChanged;
   final onDeleteItem;
+  final onEditHandler;
   final bool isDark;
 
   const TodoItem({
@@ -15,6 +16,7 @@ class TodoItem extends StatelessWidget {
     required this.todo,
     required this.onTodoChanged,
     required this.onDeleteItem,
+    required this.onEditHandler,
   }) : super(key: key);
 
   @override
@@ -43,21 +45,38 @@ class TodoItem extends StatelessWidget {
               color: (isDark) ? Colors.white : Colors.black87,
               decoration: todo.isDone ? TextDecoration.lineThrough : null),
         ),
-        trailing: Container(
-          height: 35,
-          width: 35,
-          decoration: BoxDecoration(
-              color: Colors.red.shade400,
-              borderRadius: BorderRadius.circular(5)),
-          child: IconButton(
-            icon: const Icon(Icons.delete),
-            iconSize: 18,
-            color: Colors.white,
-            onPressed: () {
-              onDeleteItem(todo.id);
-            },
-          ),
-        ),
+        trailing: Wrap(
+            spacing: 10, // space between two icons
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue.shade600,
+                      borderRadius: BorderRadius.circular(5)),
+                  height: 35,
+                  width: 35,
+                  child: IconButton(
+                    icon: const Icon(Icons.edit),
+                    iconSize: 18,
+                    color: Colors.white,
+                    onPressed: () {
+                      onEditHandler(todo.id);
+                    },
+                  )),
+              Container(
+                  decoration: BoxDecoration(
+                      color: Colors.red.shade400,
+                      borderRadius: BorderRadius.circular(5)),
+                  height: 35,
+                  width: 35,
+                  child: IconButton(
+                    icon: const Icon(Icons.delete),
+                    iconSize: 18,
+                    color: Colors.white,
+                    onPressed: () {
+                      onDeleteItem(todo.id);
+                    },
+                  )),
+            ]),
       ),
     );
   }

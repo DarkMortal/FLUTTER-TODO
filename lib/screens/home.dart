@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todolistapp/widgets/popMessage.dart';
 import 'package:todolistapp/widgets/todo_item.dart';
 import 'package:todolistapp/models/todo.dart';
 import 'package:todolistapp/models/sharedPrefHelper.dart';
@@ -80,6 +81,7 @@ class _HomeState extends State<Home> {
                                 todo: todoitem,
                                 onTodoChanged: _handleTodoChange,
                                 onDeleteItem: _handleTodoDelete,
+                                onEditHandler: _handleTodoEdit,
                               ),
                           ],
                         ),
@@ -149,34 +151,24 @@ class _HomeState extends State<Home> {
   void _addTodoItem(String todo, BuildContext context) {
     String str = todo.trim();
     if (str == "") {
-      showDialog(
-          context: context,
-          builder: (context) => Container(
-                child: AlertDialog(
-                    backgroundColor: (this.isDark)
-                        ? Color.fromRGBO(28, 35, 49, 1)
-                        : Color.fromRGBO(236, 239, 244, 1),
-                    title: Text(
-                      "Please Enter some text",
-                      style: TextStyle(
-                          color: (this.isDark) ? Colors.white : Colors.black),
-                    ),
-                    actions: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text("OK"))
-                    ]),
-              ));
+      showMessage(context, "Please Enter some text", this.isDark);
     } else {
-      setState(() {
-        todosList.add(ToDo(
-          id: DateTime.now().millisecondsSinceEpoch.toString(),
-          todoText: str,
-        ));
-      });
-      SharedPreferencesHelper.saveTasks(todosList);
+      bool isPresent = false;
+      for (ToDo t in todosList) {
+        isPresent = (t.todoText == str);
+        if (isPresent) break;
+      }
+      if (isPresent)
+        showMessage(context, "Task already present", this.isDark);
+      else {
+        setState(() {
+          todosList.add(ToDo(
+            id: DateTime.now().millisecondsSinceEpoch.toString(),
+            todoText: str,
+          ));
+        });
+        SharedPreferencesHelper.saveTasks(todosList);
+      }
       _todoController.clear();
     }
   }
@@ -188,10 +180,30 @@ class _HomeState extends State<Home> {
     SharedPreferencesHelper.saveTasks(todosList);
   }
 
+  void _handleTodoEdit(String id) {
+    editModule(
+            context,
+            todosList.firstWhere((element) => element.id == id).todoText!,
+            isDark)
+        .then((value) {
+      if (value != null) {
+        setState(() {
+          todosList[todosList.indexWhere((element) => element.id == id)]
+              .todoText = value;
+        });
+        SharedPreferencesHelper.saveTasks(todosList);
+      }
+    });
+  }
+
   void _handleTodoDelete(String id) {
-    setState(() {
-      todosList.removeWhere((element) => element.id == id);
-      SharedPreferencesHelper.saveTasks(todosList);
+    confirm(context, "Are you sure you want to delete this task?", this.isDark)
+        .then((value) {
+      if (value)
+        setState(() {
+          todosList.removeWhere((element) => element.id == id);
+          SharedPreferencesHelper.saveTasks(todosList);
+        });
     });
   }
 
