@@ -51,7 +51,7 @@ class _HomeState extends State<Home> {
                 Text(
                   (todosList.isEmpty)
                       ? "No tasks scheduled for today"
-                      : "Showing all tasks:-",
+                      : "Showing all tasks",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w500,
@@ -83,6 +83,9 @@ class _HomeState extends State<Home> {
                                 onDeleteItem: _handleTodoDelete,
                                 onEditHandler: _handleTodoEdit,
                               ),
+                            const SizedBox(
+                              height: 100,
+                            )
                           ],
                         ),
                       )
@@ -134,10 +137,13 @@ class _HomeState extends State<Home> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade800,
-                      minimumSize: const Size(60, 60),
+                      minimumSize: const Size(60, 70),
                       elevation: 10,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                     ),
-                    child: const Icon(Icons.add),
+                    child: const Icon(Icons.add, color: Colors.white),
                   ),
                 )
               ],
@@ -210,12 +216,15 @@ class _HomeState extends State<Home> {
   AppBar _buildAppbar() {
     return AppBar(
       backgroundColor: (this.isDark)
-          ? const Color.fromRGBO(23, 31, 46, 1)
-          : Colors.grey.shade200,
+          ? const Color.fromRGBO(28, 35, 49, 1)
+          : const Color.fromRGBO(236, 239, 244, 1),
       elevation: 0,
+      scrolledUnderElevation: 0.0,
       title: Text(
-        "Flutter Todo App",
-        style: TextStyle(color: (this.isDark) ? Colors.white : Colors.black87),
+        "Todos App",
+        style: TextStyle(
+            color: (this.isDark) ? Colors.white : Colors.black87,
+            fontWeight: FontWeight.w500),
       ),
       actions: [
         Theme(

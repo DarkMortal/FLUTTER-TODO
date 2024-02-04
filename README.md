@@ -7,8 +7,8 @@ A new Flutter project.
     flutter build linux
 
 ## To build for Android
-
-    flutter build apk
+    dart run flutter_launcher_icons
+    flutter build apk --no-shrink
 
 ## Getting Started
 
