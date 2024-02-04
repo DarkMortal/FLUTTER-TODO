@@ -12,11 +12,15 @@ void showMessage(BuildContext context, String message, bool isDark) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text(message,
+        title: Text("Message",
             style: TextStyle(color: (isDark) ? Colors.white : Colors.black)),
         backgroundColor: (isDark)
             ? const Color.fromRGBO(28, 35, 49, 1)
             : const Color.fromRGBO(236, 239, 244, 1),
+        content: Text(message,
+            style: TextStyle(color: (isDark) ? Colors.white : Colors.black)),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(5))),
         actions: [
           TextButton(
               style: const ButtonStyle(
@@ -36,9 +40,14 @@ Future<bool> confirm(BuildContext context, String message, bool isDark) async {
             backgroundColor: (isDark)
                 ? const Color.fromRGBO(28, 35, 49, 1)
                 : const Color.fromRGBO(236, 239, 244, 1),
-            title: Text(message,
+            title: Text("Confirm Dialog",
                 style:
                     TextStyle(color: (isDark) ? Colors.white : Colors.black)),
+            content: Text(message,
+                style:
+                    TextStyle(color: (isDark) ? Colors.white : Colors.black)),
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(5))),
             actions: [
               TextButton(
                   style: const ButtonStyle(
@@ -71,6 +80,8 @@ Future<dynamic> editModule(
               title: Text('Edit Task',
                   style:
                       TextStyle(color: (isDark) ? Colors.white : Colors.black)),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5))),
               content: TextField(
                 controller: taskController,
                 decoration: InputDecoration(
@@ -91,7 +102,7 @@ Future<dynamic> editModule(
                       else
                         Navigator.of(context).pop(taskController.text);
                     },
-                    child: const Text('SUBMIT',
+                    child: const Text('Submit',
                         style: TextStyle(color: Colors.white)))
               ]));
 }
