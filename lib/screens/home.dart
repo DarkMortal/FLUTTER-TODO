@@ -137,7 +137,7 @@ class _HomeState extends State<Home> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.blue.shade800,
-                      minimumSize: const Size(60, 70),
+                      minimumSize: const Size(60, 60),
                       elevation: 10,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
