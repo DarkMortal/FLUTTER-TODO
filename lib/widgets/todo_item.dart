@@ -43,7 +43,9 @@ class TodoItem extends StatelessWidget {
           style: TextStyle(
               fontSize: 16,
               color: (isDark) ? Colors.white : Colors.black87,
-              decoration: todo.isDone ? TextDecoration.lineThrough : null),
+              decoration: todo.isDone ? TextDecoration.lineThrough : null,
+              decorationColor: (isDark) ? Colors.white : Colors.black87
+            ),
         ),
         trailing: Wrap(
             spacing: 10, // space between two icons
